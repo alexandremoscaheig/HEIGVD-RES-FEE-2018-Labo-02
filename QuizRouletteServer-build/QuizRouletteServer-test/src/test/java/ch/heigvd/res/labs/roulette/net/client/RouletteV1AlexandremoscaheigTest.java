@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
  * 
  * @author Olivier Liechti
  */
-public class RouletteV1WasadigiTest {
+public class RouletteV1AlexandremoscaheigTest {
 
   @Rule
   public ExpectedException exception = ExpectedException.none();
@@ -24,19 +24,19 @@ public class RouletteV1WasadigiTest {
   public EphemeralClientServerPair roulettePair = new EphemeralClientServerPair(RouletteV1Protocol.VERSION);
 
   @Test
-  @TestAuthor(githubId = "wasadigi")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void theTestRouletteServerShouldRunDuringTests() throws IOException {
     assertTrue(roulettePair.getServer().isRunning());
   }
 
   @Test
-  @TestAuthor(githubId = "wasadigi")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void theTestRouletteClientShouldBeConnectedWhenATestStarts() throws IOException {
     assertTrue(roulettePair.getClient().isConnected());
   }
 
   @Test
-  @TestAuthor(githubId = "wasadigi")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void itShouldBePossibleForARouletteClientToConnectToARouletteServer() throws Exception {
     int port = roulettePair.getServer().getPort();
     IRouletteV1Client client = new RouletteV1ClientImpl();
@@ -46,13 +46,13 @@ public class RouletteV1WasadigiTest {
   }
   
   @Test
-  @TestAuthor(githubId = "wasadigi")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void theServerShouldReturnTheCorrectVersionNumber() throws IOException {
     assertEquals(RouletteV1Protocol.VERSION, roulettePair.getClient().getProtocolVersion());
   }
 
   @Test
-  @TestAuthor(githubId = "wasadigi")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void theServerShouldHaveZeroStudentsAtStart() throws IOException {
     int port = roulettePair.getServer().getPort();
     IRouletteV1Client client = new RouletteV1ClientImpl();
@@ -62,13 +62,13 @@ public class RouletteV1WasadigiTest {
   }
 
   @Test
-  @TestAuthor(githubId = {"wasadigi", "SoftEng-HEIGVD"})
+  @TestAuthor(githubId = {"alexandremoscaheig"})
   public void theServerShouldStillHaveZeroStudentsAtStart() throws IOException {
     assertEquals(0, roulettePair.getClient().getNumberOfStudents());
   }
 
   @Test
-  @TestAuthor(githubId = "SoftEng-HEIGVD")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void theServerShouldCountStudents() throws IOException {
     IRouletteV1Client client = roulettePair.getClient();
     assertEquals(0, client.getNumberOfStudents());
@@ -81,7 +81,7 @@ public class RouletteV1WasadigiTest {
   }
 
   @Test
-  @TestAuthor(githubId = "wasadigi")
+  @TestAuthor(githubId = "alexandremoscaheig")
   public void theServerShouldSendAnErrorResponseWhenRandomIsCalledAndThereIsNoStudent() throws IOException, EmptyStoreException {
     IRouletteV1Client client = roulettePair.getClient();
     exception.expect(EmptyStoreException.class);
