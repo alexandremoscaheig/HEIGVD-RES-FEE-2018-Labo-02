@@ -41,6 +41,12 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
     @Override
     public void disconnect() throws IOException {
         socket.close();
+        socket = null;
+        input.close();
+        input = null;
+        output.close();
+        output = null;
+        info = null;
     }
 
     @Override
@@ -50,6 +56,7 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
 
     @Override
     public void loadStudent(String fullname) throws IOException {
+        if(!isConnected()) throw new IOException();
         this.writeCmd(RouletteV1Protocol.CMD_LOAD);
         System.out.println(this.readBuffer());
         this.writeCmd(fullname);
@@ -59,6 +66,7 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
 
     @Override
     public void loadStudents(List<Student> students) throws IOException {
+        if(!isConnected()) throw new IOException();
         this.writeCmd(RouletteV1Protocol.CMD_LOAD);
         System.out.println(this.readBuffer());
         for(Student s : students)
@@ -70,6 +78,7 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
 
     @Override
     public Student pickRandomStudent() throws EmptyStoreException, IOException {
+        if(!isConnected()) throw new IOException();
         this.writeCmd(RouletteV1Protocol.CMD_RANDOM);
 
         RandomCommandResponse rcr = JsonObjectMapper.parseJson(this.readBuffer(), RandomCommandResponse.class);
@@ -80,12 +89,14 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
 
     @Override
     public int getNumberOfStudents() throws IOException {
+        if(!isConnected()) throw new IOException();
         this.refreshInfos();
         return this.info.getNumberOfStudents();
     }
 
     @Override
     public String getProtocolVersion() throws IOException {
+        if(!isConnected()) throw new IOException();
         this.refreshInfos();
         return this.info.getProtocolVersion();
     }
