@@ -25,8 +25,8 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
 
     private static final Logger LOG = Logger.getLogger(RouletteV1ClientImpl.class.getName());
     private Socket socket;
-    private BufferedReader input;
-    private BufferedWriter output;
+    protected BufferedReader input;
+    protected BufferedWriter output;
     private InfoCommandResponse info;
 
 
@@ -101,7 +101,7 @@ public class RouletteV1ClientImpl implements IRouletteV1Client {
         return this.info.getProtocolVersion();
     }
 
-    private void writeCmd(String cmd) throws IOException{
+    protected void writeCmd(String cmd) throws IOException{
         this.output.write(cmd + "\n");
         this.output.flush();
     }
